@@ -1,8 +1,12 @@
 import React from 'react'
+import Login from '../forms/login'
 
 export default function Home(){
 
     return(
-        <div>Home</div>
+        <div>
+            <div> <Login /> </div>
+        </div>
+        
     )
 }
