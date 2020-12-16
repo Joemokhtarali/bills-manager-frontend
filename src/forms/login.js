@@ -23,6 +23,10 @@ export default function Login() {
 
   return (
     <div style={{ height: "400px", width: "200px"}}>
+        <div>
+            <h3>Welcome to Bills Manager</h3>
+            <p>Bills Manager helps you keep track of all your Bills and Income for the month, so you can control your spending. </p>
+        </div>
       <form
         style={{ display: "flex", flexDirection: "column" , textAlign: 'center'}}
       >
