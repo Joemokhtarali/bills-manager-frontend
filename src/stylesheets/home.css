@@ -1,0 +1,13 @@
+.home{
+    display: flex;
+}
+
+.left{
+    flex: 2;
+    background-color: blue;
+}
+
+.right {
+    flex: 1;
+    
+}
