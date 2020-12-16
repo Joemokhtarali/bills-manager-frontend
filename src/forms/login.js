@@ -1,24 +1,21 @@
 import { React, useState } from "react";
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
-
-
+import FormControl from "@material-ui/core/FormControl";
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-            width: '25ch',
-        },
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "25ch",
     },
+  },
 }));
 
 export default function Login() {
   const classes = useStyles();
   const [userName, setuserName] = useState("");
   const [password, setPassword] = useState("");
-
 
   const changeUserName = (e) => {
     setuserName(e.target.value);
@@ -31,6 +28,24 @@ export default function Login() {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     console.log("Login", userName, password);
+    let data = {user_name: userName, password: password}
+
+    fetch('http://localhost:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then(resp => resp.json())
+    .then(response => {
+      if(response.errors){
+        alert(response.errors)
+      }else {
+        // assign current user 
+        // redirect page  
+      }
+    })
   };
   const handleSignupSubmit = (e) => {
     e.preventDefault();
@@ -38,35 +53,32 @@ export default function Login() {
   };
 
   return (
-    <div style={{ height: "400px", width: "200px" }}>
-      <FormControl
-        className={classes.margin}
-        style={{ "margin-left": "100px" }}
-      >
+    <div style={{ height: "400px", width: "400px" }}>
+      <FormControl className={classes.margin} style={{ marginLeft: "50px" }}>
         <TextField
           required
           type="text"
-          id="standard-required"
-          label="name"
-          placeholder="User Name"
+          id="login-name"
+          label="Username"
           // value={name}
           onChange={changeUserName}
         />
         <TextField
           required
-          id="standard-required"
+          id="login-password"
           type="password"
           value={password}
           label="password"
-          placeholder="Password"
           onChange={changepassword}
         />
-        <button style={{ width: "100px" }} onClick={handleSignupSubmit}>
-          Signup
-        </button>
-        <button style={{ width: "100px" }} onClick={handleLoginSubmit}>
-          Login
-        </button>
+        <div style={{ width: "200px", display: "flex", margin: '10px' }}>
+          <button style={{ width: "200px" }} onClick={handleSignupSubmit}>
+            Signup
+          </button>
+          <button style={{ width: "200px" }} onClick={handleLoginSubmit}>
+            Login
+          </button>
+        </div>
       </FormControl>
       {/* <form
         style={{
