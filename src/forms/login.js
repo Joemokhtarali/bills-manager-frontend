@@ -52,14 +52,15 @@ export default function Login() {
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     let data = {user_name: userName, password: password}
+    
+
     fetch('http://localhost:3000/signup', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
-        'Accept': 'application/json'
       },
       body: JSON.stringify(data)
-    }).then(resp => resp.json)
+    }).then(resp => resp.json())
       .then(response => {
       if(response.errors){
         alert(response.errors)
