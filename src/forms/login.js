@@ -27,7 +27,6 @@ export default function Login() {
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    console.log("Login", userName, password);
     let data = {user_name: userName, password: password}
 
     fetch('http://localhost:3000/login', {
@@ -42,14 +41,33 @@ export default function Login() {
       if(response.errors){
         alert(response.errors)
       }else {
+        console.log(response);
+        console.log('signed in')
         // assign current user 
         // redirect page  
       }
     })
   };
+
   const handleSignupSubmit = (e) => {
     e.preventDefault();
-    console.log("Signup", userName, password);
+    let data = {user_name: userName, password: password}
+    fetch('http://localhost:3000/signup', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then(resp => resp.json)
+      .then(response => {
+      if(response.errors){
+        alert(response.errors)
+      }else{
+        console.log(response);
+        console.log('signed up')
+      }
+    })
   };
 
   return (
