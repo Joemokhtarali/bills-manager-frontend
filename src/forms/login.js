@@ -41,6 +41,7 @@ export default function Login() {
       if(response.errors){
         alert(response.errors)
       }else {
+        localStorage.user_id = response.id
         console.log(response);
         console.log('signed in')
         // assign current user 
@@ -65,6 +66,7 @@ export default function Login() {
       if(response.errors){
         alert(response.errors)
       }else{
+        localStorage.user_id = response.id
         console.log(response);
         console.log('signed up')
       }
